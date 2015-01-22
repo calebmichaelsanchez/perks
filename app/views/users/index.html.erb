@@ -1,0 +1,4 @@
+<h1>Hi Vader!</h1>
+<% @users.each do | u | %>
+<p><%= link_to u.first_name, user_path(u) %></p>
+<% end %>
