@@ -22,11 +22,13 @@ ActiveRecord::Schema.define(version: 20150129135532) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "selection"
+    t.integer  "voter_id"
+    t.integer  "selection_id"
     t.string   "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
+
+  add_index "votes", ["voter_id"], name: "index_votes_on_voter_id"
 
 end
