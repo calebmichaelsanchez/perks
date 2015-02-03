@@ -1,4 +1,15 @@
-<h1>Hi Vader!</h1>
-<% @users.each do | u | %>
-<p><%= link_to u.first_name, user_path(u) %></p>
-<% end %>
+<section class="form">
+	<article>
+		<img class="logo" src="/assets/logo.svg" alt="Bonfire Red Logo">
+		<h1>How we make things is just as important as what we make</h1>
+		<p>Bonfire Red was built around the idea that great work should be challenging, and the challenge should be fun. We strive to maintain an open culture where everyone is a contributor and feels comfortable sharing ideas and opinions. It’s really the people that make Bonfire Red the kind of company it is. This is one way we can highlight individual associates for adding fuel to our flame.</p>
+		
+		<%= form_tag(votes_path, method: "post") do %>
+		  <%= label_tag(:selection_id, "Vote:") %>
+		  <%= select_tag :selection_id, options_from_collection_for_select(@users, 'id', 'full_name') %>
+		  <%= label_tag(:comment, "Comment:") %>
+		  <%= text_area_tag('comment') %>
+		  <%= submit_tag("Submit") %>
+		<% end %>
+	</article>
+</section>
