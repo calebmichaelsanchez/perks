@@ -4,7 +4,6 @@
 		<h1>How we make things is just as important as what we make</h1>
 		<p>Bonfire Red was built around the idea that great work should be challenging, and the challenge should be fun. We strive to maintain an open culture where everyone is a contributor and feels comfortable sharing ideas and opinions. It’s really the people that make Bonfire Red the kind of company it is. This is one way we can highlight individual associates for adding fuel to our flame.</p>
 		
-		<!-- only render form if current_user hasn't voted this month -->
 		<% if current_user.can_vote? %>
 			<!-- let's make this submit via ajax -->
 			<%= form_tag(votes_path, method: "post") do %>
@@ -14,8 +13,7 @@
 			  <%= text_area_tag('comment') %>
 			  <%= submit_tag("Submit") %>
 			<% end %>
-		<% else %>
-			<!-- put whatever you want to say to peple who have already voted right here -->
 		<% end %>
+
 	</article>
 </section>
