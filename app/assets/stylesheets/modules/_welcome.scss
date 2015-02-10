@@ -1,27 +1,35 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.form {
-	width: 100%;
-	article {
-		padding: 80px;
-		background: rgba(0, 0, 0, .85);
-		width: 33.33%;
-		float: right;
+@keyframes alert {
+	0% , 100%{
+		transform: translateY(-100%);
+	}
+	10%, 90% {
+		transform: translateY(0%);
 	}
 }
-.logo {
-	width: 45px;
-}
-input, label, select {
-	display: block;
-	color: #333;
+.alert, .notice {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	width: 100%;
+	background: $c-primary-dark;
+	padding: 1em;
+	color: $white;
+	z-index: $z10;
+	transform: translateY(-100%);
+	animation: alert 3s 1s 1 ease forwards;
 }
 .navbar {
+	position: relative;
 	width: 100%;
 	color: $white;
-	padding: 1em 1em;
-	text-align: right;
+	padding: 1em;
+	text-align: left;
+	z-index: $z9;
 }
 .navbar-link {
 	display: inline-block;
@@ -29,7 +37,7 @@ input, label, select {
 	color: $white-t;
 }
 // login box
-.login, .signup {
+.login, .signup, .edit {
 	position: relative;
 	max-width: 400px;
 	border-radius: 5px;
@@ -56,7 +64,7 @@ input, label, select {
 		}
 	}
 }
-.login-item, .signup-item {
+.login-item, .signup-item, .edit-item {
 	label {
 		margin-bottom: 8px;
 		color: $c-tertiary;
@@ -76,7 +84,7 @@ input, label, select {
 	label[for="user_remember_me"] {
 		display: inline-block;
 	}
-	.actions {
+	.actions, .button_to {
 		margin: 20px 0 15px;
 		input {
 			border: none;
@@ -86,9 +94,16 @@ input, label, select {
 			color: $white;
 		}
 	}
+	.button_to input {
+		background-color: $c-primary-dark;
+	}
 	a {
 		display: inline-block;
 		margin-right: 10px;
 		color: $c-tertiary;
+	}
+	p {
+		color: $c-tertiary;
+		margin-bottom: 5px;
 	}
 }

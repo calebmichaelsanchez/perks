@@ -9,6 +9,8 @@ html, body {
 }
 body {
 	font-family: $f-secondary;
+	font-weight: $fw-medium;
+	font-size: 18px;
 	background-color: #333;
 	background: url('/assets/background/blur.jpg') no-repeat center center;
 	background-size: cover;
@@ -16,13 +18,16 @@ body {
 a {
 	text-decoration: none;
 	color: $white;
+	transition: .4s;
 }
 h1 {
-	font-family: $f-secondary;
-	font-size: 28px;
+	font-family: $f-primary;
+	font-size: em(28px);
 	color: #fff;
 	text-transform: uppercase;
-	max-width: 600px;
+	letter-spacing: 1px;
+	display: block;
+	max-width: 400px;
 }
 h2 {
 	font-family: $f-secondary;
@@ -34,6 +39,6 @@ p {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 18px;
 	font-weight: 300;
-	color: #fff;
+	color: $white-t;
 	line-height: 1.4;
 }
