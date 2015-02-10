@@ -11,4 +11,8 @@ class VotesController < ApplicationController
 		flash[:alert] = "You did it!"
 		redirect_to root_url
 	end
+
+  def results
+    @months = Vote.elections
+  end
 end
