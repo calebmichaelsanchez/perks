@@ -2,28 +2,29 @@
 <html>
 <head>
   <title>Perks</title>
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Oswald' rel='stylesheet' type='text/css'>
+  <script src="//use.typekit.net/kop2ppg.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
- <!-- you can put this in a header navbar thingy -->
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
-
-
-
 <% flash.each do |name, msg| -%>
- <%= content_tag :div, msg, class: name %>
+   <%= content_tag :div, msg, class: name %>
 <% end -%>
+
+ <!-- you can put this in a header navbar thingy -->
+<div class="navbar">
+  <% if user_signed_in? %>
+    Logged in as <strong><%= current_user.email %></strong>.
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+  <% end %>
+</div>
 
 <%= yield %>
 
