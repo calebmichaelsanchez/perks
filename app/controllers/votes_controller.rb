@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @users = User.where.not(id: current_user.id)
@@ -11,4 +11,8 @@ class VotesController < ApplicationController
 		flash[:alert] = "You did it!"
 		redirect_to root_url
 	end
+
+  def results
+    @years = Vote.all.pluck(:created_at).map {|date| date.year}.uniq
+  end
 end
