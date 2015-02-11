@@ -1,0 +1,89 @@
+@mixin hero($img) {
+	background-image: $img;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+@mixin burger($bg-color, $width, $height) {
+	.burger {
+		position: relative;
+		width: $width !important;
+		height: $height;
+		background: $bg-color;
+		transition: $trns-duration;
+
+		&:after, &:before {
+			position: absolute;
+			background: $bg-color;
+	    content: "";
+	    display: block;
+	    height: $height;
+	    transition: all 0.3s ease 0s;
+	    width: $width;
+	    z-index: 1;
+		} // after, before
+		&:before {
+			top: -8px;
+		} // before
+		&:after {
+			top: 8px;
+		}	// after
+	} // burger
+	.ex {
+		background: transparent;
+
+		&:before {
+			transform: rotate(45deg);
+			top: 0;
+		}
+		&:after {
+			transform: rotate(-45deg);
+			top: 0;
+		}
+	}
+
+}
+
+@mixin ghost($margin: -0.25em) {
+	text-align: center;
+
+	&:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+		margin-right: $margin;
+	}
+	> .ghosted {
+		display: inline-block;
+		vertical-align: middle;
+		width: 98%;
+	}
+}
+
+$breakpoints: (
+	'xxx-small'	: ( min-width: 380px ),
+	'xx-small'	: ( min-width: 520px ),
+	'x-small'		: ( min-width: 680px ),
+  'small'  		: ( min-width: 767px ),
+  'medium' 		: ( min-width: 992px ),
+  'large'  		: ( min-width: 1200px )
+);
+
+@mixin respond-to($name) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $name) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

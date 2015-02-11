@@ -1,0 +1,47 @@
+// --------------------------------------------------
+// Config
+// --------------------------------------------------
+
+$font-url--google			: 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400';
+$f-primary 						: 'alternate-gothic-no-3-d', sans-serif;
+$f-secondary					: "Source Sans Pro", sans-serif;
+$f-tertiary						: "Museo Slab", serif;
+
+// Font Weights
+
+$fw-medium					: 300;
+$fw-bold						: 400;
+
+// Base Font Size
+$base__font-size 		: 16px;
+
+// Descriptive Base Colors
+$white    : #fff;
+$white-t	: rgba($white, .875);
+$black    : #0b0b0b;
+$grey     : #797e83;
+
+// Brand Colors
+$c-primary			: #F58553;
+$c-secondary		: #5E554B;
+$c-tertiary			: #89837a;
+
+// Color Pallete Modifiers
+
+$c-primary-dark 			: darken($c-primary, 10%);
+$c-secondary-dark 		: darken($c-secondary, 15%);
+
+// Transitions
+$trns-duration		: .4s;
+
+// Z-index management
+$z1		: 1;
+$z2		: 2;
+$z3		: 3;
+$z4		: 4;
+$z5		: 5;
+$z6		: 6;
+$z7		: 7;
+$z8		: 8;
+$z9		: 9;
+$z10	: 10;
