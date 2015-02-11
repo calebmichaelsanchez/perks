@@ -1,3 +1,17 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready ->
+  initYearPicker()
+
+initYearPicker = ->
+  $('.year').click ->
+    $('#winners').empty()
+    year = $(@).data('year')
+    winners = $(@).data('winners')
+
+    $.each winners, (i, winner) ->
+      console.log winner.month
+      console.log winner.winner
+      $('#winners').append(
+        '<img class="trophy" src="" alt="trophy"/>'+
+        '<span class="month">'+winner.month+'</span>'+
+        '<span clas="winner">'+winner.winner+'</span>'  
+      )

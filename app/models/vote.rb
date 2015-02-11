@@ -6,16 +6,30 @@ class Vote < ActiveRecord::Base
 
   scope :for_user, -> (user) { where(selection_id: user.id) }
   scope :by_user,  -> (user) { where(voter_id: user.id) }
-  
+
   def self.in_month(month, year)
-    date = Date.new(year, month)
-    last_month, next_month = date - 1.month, date + 1.month 
-    where("created_at >= ? AND created_at <= ?", last_month, next_month)
+    time = Time.new(year, month)
+    where(created_at: time.beginning_of_month..time.end_of_month)
   end
 
   def self.winner_of(month, year)
     id = self.in_month(month, year).group(:selection_id).count.try(:max)
     id ? User.find(id[0]) : nil
+  end
+
+  def self.tie?(month, year)
+    # what to do if same num of votes? 
+  end
+
+  def self.year_winners(year)
+    winners = []
+    1.upto(12) do |month|
+      if winner = winner_of(month, year)
+        winners << {month: Date::MONTHNAMES[month], winner: winner.full_name }
+      end
+    end
+    winners #[{month: "jan", winner: "donivan"}{month: ...}]
+    # need to account for ties. ie { winner: "TIE: jack & jill"}
   end
 
   def self.current_leader
@@ -26,12 +40,7 @@ class Vote < ActiveRecord::Base
 
   def self.last_winner
     month, year = (Date.today - 1.month).month, Date.today.year
-    byebug
     self.winner_of(month, year)
-  end
-
-  def self.elections
-    #return array: [month/year => winner]
   end
 
 end

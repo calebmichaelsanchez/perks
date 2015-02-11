@@ -1,7 +1,15 @@
 <h1>View Past Winners</h1>
 
-<%= form_tag results_path, remote: true %>
-  <%= select_tag  %>
-
-  <%= submit_tag %>
+<% @years.each do |year| %>
+  <div class="year" data-year="<%= year %>" data-winners="<%= Vote.year_winners(year).to_json %>"><%= year %></div>
 <% end %>
+
+<ul id="winners">
+  <!-- populates via JS -->
+   
+  <!-- li -->
+    <!-- img.trophy -->
+    <!-- span.month span.winner -->
+  <!-- /li -->
+</ul>
+
