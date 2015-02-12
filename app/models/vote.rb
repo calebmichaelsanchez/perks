@@ -12,23 +12,28 @@ class Vote < ActiveRecord::Base
     where(created_at: time.beginning_of_month..time.end_of_month)
   end
 
-  def self.winner_of(month, year)
-    id = self.in_month(month, year).group(:selection_id).count.try(:max)
-    id ? User.find(id[0]) : nil
+  def self.results_of(month, year)
+    max_votes = self.in_month(month, year).group(:selection_id).count.max[1]
+    results   = self.in_month(month, year).group(:selection_id).count.select{|id, votes| votes == max_votes}
+    results.map { |id, votes| {user_id: id, votes: votes} }
   end
 
   def self.tie?(month, year)
     # what to do if same num of votes? 
   end
 
-  def self.year_winners(year)
+  def self.winners
+    elections = Vote.all.pluck(:created_at).uniq.map{|t| {month: t.month, year: t.year} }
     winners = []
-    1.upto(12) do |month|
-      if winner = winner_of(month, year)
-        winners << {month: Date::MONTHNAMES[month], winner: winner.full_name }
+    elections.each do |election|
+      month, year = election[:month], election[:year]
+      if results = results_of(month, year)
+        votes  = results[0][:votes]
+        result = results.map{|r| r[:user_id] }
+        winners << {month: Date::MONTHNAMES[month], year: year, winner: result, votes: votes }
       end
     end
-    winners #[{month: "jan", winner: "donivan"}{month: ...}]
+    winners #[{year: 2015, month: "jan", winner: "donivan"}{month: ...}]
     # need to account for ties. ie { winner: "TIE: jack & jill"}
   end
 
@@ -40,7 +45,7 @@ class Vote < ActiveRecord::Base
 
   def self.last_winner
     month, year = (Date.today - 1.month).month, Date.today.year
-    self.winner_of(month, year)
+    self.results_of(month, year)
   end
 
 end
