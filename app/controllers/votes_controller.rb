@@ -13,6 +13,7 @@ class VotesController < ApplicationController
 	end
 
   def results
-    @years = Vote.all.pluck(:created_at).map {|date| date.year}.uniq
+    # [{:month=>"February", :year=>2015, :winner=>[3, 4], :votes=>1}, {:month=>"February", :year=>2015, :winner=>[3, 4], :votes=>1}]
+    @winners = Vote.winners
   end
 end

@@ -1,15 +1,18 @@
 <h1>View Past Winners</h1>
 
-<% @years.each do |year| %>
-  <div class="year" data-year="<%= year %>" data-winners="<%= Vote.year_winners(year).to_json %>"><%= year %></div>
+<% @winners.each do |winner| %>
+
+  <ul id="winners">
+     
+    <li>
+      <span class="month"><%= winner[:month] %></span>
+      <span clas="year"><%= winner[:year] %>
+      <!-- need to combine names for tie winner here. currently will break in tie month -->
+      <span clas="winner"><%= Vote.find(winner[:user_id]).full_name.titleize %></span>
+    </li>
+  
+  </ul>
+
 <% end %>
 
-<ul id="winners">
-  <!-- populates via JS -->
-   
-  <!-- li -->
-    <!-- img.trophy -->
-    <!-- span.month span.winner -->
-  <!-- /li -->
-</ul>
 
