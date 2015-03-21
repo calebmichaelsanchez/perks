@@ -6,9 +6,13 @@ class VotesController < ApplicationController
   end
 
 	def create
-		vote = Vote.new(voter_id: current_user.id, selection_id: params[:selection_id], comment: params[:comment])
-		vote.save
-		flash[:alert] = "You did it!"
+    if current_user.can_vote?
+  		vote = Vote.new(voter_id: current_user.id, selection_id: params[:selection_id], comment: params[:comment])
+  		vote.save
+  		flash[:alert] = "You did it!"
+    else
+      flash[:error] = "You have already voted this month."
+    end
 		redirect_to root_url
 	end
 

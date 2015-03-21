@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 	end
 
   def can_vote?
-    vote = Vote.where(voter_id: self.id).take
+    vote = Vote.where(voter_id: self.id).last
     if vote && vote.created_at.month == Time.now.month && vote.created_at.year == Time.now.year
       return false
     else
