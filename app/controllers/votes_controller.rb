@@ -17,7 +17,13 @@ class VotesController < ApplicationController
 	end
 
   def results
-    # [{:month=>"February", :year=>2015, :winner=>[3, 4], :votes=>1}, {:month=>"February", :year=>2015, :winner=>[3, 4], :votes=>1}]
-    @winners = Vote.winners
+    # [{user_id: 1, votes: 3, comments: []}]
+    @winners = Vote.last_winners
+    @winners.map! do |winner|
+    time = DateTime.now - 1.month
+      comments = Vote.where(created_at: time.beginning_of_month..time.end_of_month, selection_id: winner[:user_id]).pluck(:comment)
+      { user: User.find(winner[:user_id]), votes: winner[:votes], comments: comments }
+    end 
   end
+
 end

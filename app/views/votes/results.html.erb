@@ -1,18 +1,18 @@
-<h1>View Past Winners</h1>
+<h1><%= Date.today.strftime("%B") %> Results</h1>
 
-<% @winners.each do |winner| %>
+<div class="winners">
 
-  <ul id="winners">
-     
-    <li>
-      <span class="month"><%= winner[:month] %></span>
-      <span clas="year"><%= winner[:year] %>
-      <!-- need to combine names for tie winner here. currently will break in tie month -->
-      <span clas="winner"><%= Vote.find(winner[:user_id]).full_name.titleize %></span>
-    </li>
-  
-  </ul>
+  <!-- titleized first/last name -->
+  <% @winners.each do |winner| %>
+    <div class="winner">
+      <h3><%= winner[:user].full_name.titleize %></h3>
+        <%#= winner[:votes] %>
+      <ul>
+        <% winner[:comments].each do |comment| %>
+          <li><%= comment %></li>
+        <% end %>
 
-<% end %>
-
-
+      </ul>
+    </div>
+  <% end %>
+</div>

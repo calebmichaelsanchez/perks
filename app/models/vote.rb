@@ -19,7 +19,8 @@ class Vote < ActiveRecord::Base
   end
 
   def self.tie?(month, year)
-    # what to do if same num of votes? 
+    # what to do if same num of votes?
+
   end
 
   def self.winners
@@ -43,7 +44,7 @@ class Vote < ActiveRecord::Base
     id ? User.find(id[0]) : nil
   end
 
-  def self.last_winner
+  def self.last_winners
     month, year = (Date.today - 1.month).month, Date.today.year
     self.results_of(month, year)
   end
