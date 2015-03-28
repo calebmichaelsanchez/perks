@@ -7,6 +7,11 @@ class Vote < ActiveRecord::Base
   scope :for_user, -> (user) { where(selection_id: user.id) }
   scope :by_user,  -> (user) { where(voter_id: user.id) }
 
+  def elections
+    # get uniq month/year combos of where votes exist
+    
+  end
+
   def self.in_month(month, year)
     time = Time.new(year, month)
     where(created_at: time.beginning_of_month..time.end_of_month)

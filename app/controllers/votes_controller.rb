@@ -1,5 +1,6 @@
 class VotesController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_user?, only: [:dashboard]
 
   def index
     @users = User.where.not(id: current_user.id)
@@ -24,6 +25,17 @@ class VotesController < ApplicationController
       comments = Vote.where(created_at: time.beginning_of_month..time.end_of_month, selection_id: winner[:user_id]).pluck(:comment)
       { user: User.find(winner[:user_id]), votes: winner[:votes], comments: comments }
     end 
+    # [{user: <Class: User>, votes: 3, comments: ["comment"]}]
   end
+
+  def dashboard
+    # need list of month/years where votes exist
+    # @elections = # maybe something like [{month: 1, year: 2015}, {month: 12, year: 2014}] 
+  end
+
+  private
+    def admin_user?
+      current_user.admin?
+    end
 
 end
