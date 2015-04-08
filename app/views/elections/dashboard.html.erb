@@ -1,0 +1,15 @@
+<h1>Dashboard</h1>
+
+<!-- select election months/years, submit via ajax -->
+<div>
+  <%= form_tag("/election", id: 'election-form', remote: true, method: "get") do %>
+    <%= select_tag(:election_id, options_for_select(@elections_collection, :id)) %>
+
+    <%= submit_tag "Select" %>
+  <% end %>
+</div>
+<!-- display all votes for the election and comments -->
+<!-- order by selected vote ie all votes for caleb, then all votes for jacob -->
+
+<div id="election-results">
+</div>

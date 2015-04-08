@@ -1,15 +1,16 @@
-<h1><%= Date.today.strftime("%B") %> Results</h1>
+<h1><%= (Date.today - 1.month).strftime("%B") %> Results</h1>
 
 <div class="winners">
 
-  <!-- titleized first/last name -->
   <% @winners.each do |winner| %>
     <div class="winner">
       <h3><%= winner[:user].full_name.titleize %></h3>
-        <%#= winner[:votes] %>
+        <%#= winner[:vote_count] %>
       <ul>
         <% winner[:comments].each do |comment| %>
-          <li><%= comment %></li>
+          <% if comment.present? %>
+            <li><%= comment %></li>
+          <% end %>
         <% end %>
 
       </ul>
