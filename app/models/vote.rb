@@ -8,4 +8,8 @@ class Vote < ActiveRecord::Base
   scope :for_user, -> (user) { where(selection_id: user.id) }
   scope :by_user,  -> (user) { where(voter_id: user.id) }
 
+  def comment
+    read_attribute(:comment) || ''
+  end
+
 end
