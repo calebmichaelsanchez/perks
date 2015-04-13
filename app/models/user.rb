@@ -3,15 +3,18 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-	
+
   has_many :votes, class_name: "Vote", foreign_key: "voter_id"
 	has_many :selections, class_name: "Vote", foreign_key: "selection_id"
-	
+
 	validates_presence_of :first_name, :last_name
-  validates_uniqueness_of :first_name, :last_name
+
+  # blocks possibility of two people named "Flannery O'Connor" from existing
+  # remove line to allow duplicate first/last name combinations
+  validates_uniqueness_of :first_name, scope: :last_name
 
 	def full_name
-		self.first_name + " " + self.last_name
+		self.first_name.downcase.capitalize + " " + self.last_name.downcase.capitalize
 	end
 
   def can_vote?
